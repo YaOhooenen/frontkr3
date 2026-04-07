@@ -1,24 +1,87 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Заметки</title>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#4285f4">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4285f4">
+  <link rel="apple-touch-icon" href="/icons/favicon-128x128.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Заметки с уведомлениями</title>
+  <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+  <link rel="icon" href="/icons/favicon.ico" sizes="16x16" type="image/ico">
+  <style>
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    .toast-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4285f4;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      animation: slideIn 0.3s ease;
+    }
+    .note-item {
+      background: #f5f5f5;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .note-time {
+      font-size: 0.8em;
+      color: #666;
+    }
+    .note-text {
+      margin: 5px 0 0 0;
+      font-size: 1em;
+    }
+  </style>
 </head>
 <body>
-    <h1>Заметки</h1>
-    
-    <form id="noteForm">
-        <input type="text" id="noteInput" placeholder="Введите заметку">
-        <button type="submit">Добавить</button>
-    </form>
-    
-    <ul id="notesList"></ul>
-    
-    <script src="app.js"></script>
+  <div class="container">
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-12">
+        <h1>📝 Мои заметки</h1>
+        <p class="text-grey">Приложение с WebSocket и Push-уведомлениями</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-9">
+        <input type="text" id="note-input" placeholder="Введите заметку..." style="width: 100%; padding: 10px; font-size: 16px;">
+      </div>
+      <div class="col-3">
+        <button id="add-btn" class="button primary" style="width: 100%;">➕ Добавить</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h3>Список заметок</h3>
+        <ul id="notes-list" style="list-style: none; padding-left: 0;"></ul>
+      </div>
+    </div>
+
+    <footer class="is-center" style="margin-top: 30px; padding: 20px; border-top: 1px solid #eee;">
+      <button id="enable-push" class="button success">🔔 Включить уведомления</button>
+      <button id="disable-push" class="button error" style="display:none;">🔕 Отключить уведомления</button>
+    </footer>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
