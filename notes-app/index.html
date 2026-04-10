@@ -6,22 +6,12 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#4285f4">
-  <link rel="apple-touch-icon" href="/icons/favicon-128x128.png">
+  <link rel="apple-touch-icon" href="/icons/android-chrome-192x192.png">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Заметки с уведомлениями</title>
+  <title>Заметки с напоминаниями</title>
   <link rel="stylesheet" href="https://unpkg.com/chota@latest">
   <link rel="icon" href="/icons/favicon.ico" sizes="16x16" type="image/ico">
   <style>
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
     .toast-notification {
       position: fixed;
       top: 20px;
@@ -33,6 +23,10 @@
       z-index: 1000;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
     .note-item {
       background: #f5f5f5;
@@ -52,32 +46,27 @@
 </head>
 <body>
   <div class="container">
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-12">
-        <h1>📝 Мои заметки</h1>
-        <p class="text-grey">Приложение с WebSocket и Push-уведомлениями</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-9">
-        <input type="text" id="note-input" placeholder="Введите заметку..." style="width: 100%; padding: 10px; font-size: 16px;">
-      </div>
-      <div class="col-3">
-        <button id="add-btn" class="button primary" style="width: 100%;">➕ Добавить</button>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <h3>Список заметок</h3>
-        <ul id="notes-list" style="list-style: none; padding-left: 0;"></ul>
-      </div>
-    </div>
-
+    <h1>Мои заметки</h1>
+    
+    <h2>Добавить заметку</h2>
+    <form id="note-form" class="row is-center">
+      <input class="col-9" type="text" id="note-input" placeholder="Введите текст заметки" required>
+      <button class="col-3 button primary" type="submit">Добавить</button>
+    </form>
+    
+    <h2>Добавить с напоминанием</h2>
+    <form id="reminder-form" class="row is-center" style="margin-top: 1rem;">
+      <input class="col-5" type="text" id="reminder-text" placeholder="Текст напоминания" required>
+      <input class="col-4" type="datetime-local" id="reminder-time" required>
+      <button class="col-3 button success" type="submit">Добавить с напоминанием</button>
+    </form>
+    
+    <h2>Список заметок</h2>
+    <ul id="notes-list" style="list-style: none; padding-left: 0;"></ul>
+    
     <footer class="is-center" style="margin-top: 30px; padding: 20px; border-top: 1px solid #eee;">
-      <button id="enable-push" class="button success">🔔 Включить уведомления</button>
-      <button id="disable-push" class="button error" style="display:none;">🔕 Отключить уведомления</button>
+      <button id="enable-push" class="button success">Включить уведомления</button>
+      <button id="disable-push" class="button error" style="display:none;">Отключить уведомления</button>
     </footer>
   </div>
 

@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+
 app.use(express.static(path.join(__dirname, 'notes-app')));
 
 const options = {
@@ -11,8 +12,10 @@ const options = {
   cert: fs.readFileSync(path.join(__dirname, 'localhost+2.pem'))
 };
 
-// Используем порт 3002
-https.createServer(options, app).listen(3002, () => {
-  console.log('✓ HTTPS сервер запущен!');
-  console.log('📱 Адрес: https://localhost:3002');
+const server = https.createServer(options, app);
+
+const PORT = 3002;
+
+server.listen(PORT, () => {
+  console.log(`HTTPS сервер запущен на https://localhost:${PORT}`);
 });

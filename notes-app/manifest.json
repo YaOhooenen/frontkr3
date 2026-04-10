@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4285f4",
-  "description": "Приложение для заметок с WebSocket и Push-уведомлениями",
+  "description": "Приложение для заметок с напоминаниями",
   "orientation": "portrait-primary",
   "scope": "/",
   "icons": [
@@ -25,7 +25,7 @@
       "src": "/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/android-chrome-512x512.png",
